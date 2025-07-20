@@ -5,25 +5,35 @@ import (
 	"math"
 )
 
+var res string
+
 func main() {
 	userKg, userHeight := getUserInput()
 
 	IMT := calculateIMT(userKg, userHeight)
-	fmt.Println(outputResult(IMT))
 
+	switch {
+	case IMT < 16:
+		res = fmt.Sprintln("Значительный дефицит!")
+	case IMT < 18.5:
+		res = fmt.Sprintln("Дефицит")
+	case IMT < 25:
+		res = fmt.Sprintln("Норма")
+	case IMT < 30:
+		res = fmt.Sprint("Лишний вес")
+	case IMT < 35:
+		res = fmt.Sprintln("Ожирение первой степени")
+	case IMT < 40:
+		res = fmt.Sprintln("Ожирение второй степени")
+	case IMT >= 40:
+		res = fmt.Sprintln("Ожирение третей степени")
+	}
+
+	fmt.Println(outputResult(IMT))
 }
 
 func outputResult(imt float64) string {
-	result := fmt.Sprintf(`----Таблица индексов-----
-< 16 Значительный дефицит
-< 16 - 18.5 дефицит
-< 18.5 - 25 норма
-< 25 - 30 лишний вес
-< 30 - 35 Ожирение первой степени
-< 35 - 40 Ожирение второй степени
-< 40 Ожирение третей степени
--------------------------------------
-Ваш индекс: %.1f`, imt)
+	result := fmt.Sprintf("Ваш индекс: %.1f, %s", imt, res)
 	return result
 }
 
@@ -37,14 +47,12 @@ func getUserInput() (float64, float64) {
 	var userHeight float64
 	var userKg float64
 	fmt.Println("__Калькулятор индекса массы тела__")
-	fmt.Println()
-	fmt.Println("----------------------")
+	fmt.Println("----------------------------------")
 	fmt.Print("Введите ваш рост в сантиметрах:")
 	fmt.Scan(&userHeight)
-	fmt.Println("----------------------")
+	fmt.Println("----------------------------------")
 	fmt.Print("Введите ваш вес в киллограмах:")
 	fmt.Scan(&userKg)
-	fmt.Println("----------------------")
-	fmt.Println()
+	fmt.Println("----------------------------------")
 	return userKg, userHeight
 }
