@@ -5,12 +5,16 @@ import (
 	"math"
 )
 
-var res string
-
 func main() {
 	userKg, userHeight := getUserInput()
 
 	IMT := calculateIMT(userKg, userHeight)
+
+	fmt.Println(outputResult(IMT))
+}
+
+func outputResult(IMT float64) string {
+	var res string
 
 	switch {
 	case IMT < 16:
@@ -28,12 +32,7 @@ func main() {
 	case IMT >= 40:
 		res = fmt.Sprintln("Ожирение третей степени")
 	}
-
-	fmt.Println(outputResult(IMT))
-}
-
-func outputResult(imt float64) string {
-	result := fmt.Sprintf("Ваш индекс: %.1f, %s", imt, res)
+	result := fmt.Sprintf("Ваш индекс: %.1f, %s", IMT, res)
 	return result
 }
 
