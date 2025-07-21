@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -9,11 +10,16 @@ func main() {
 	for {
 		userKg, userHeight := getUserInput()
 
-		IMT := calculateIMT(userKg, userHeight)
+		IMT, err := calculateIMT(userKg, userHeight)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
 
 		fmt.Println(outputResult(IMT))
 
 		isRepeateCalculation := checkRepaetCalculation()
+
 		if !isRepeateCalculation {
 			break
 		}
@@ -44,10 +50,13 @@ func outputResult(IMT float64) string {
 	return result
 }
 
-func calculateIMT(userKg, userHeight float64) float64 {
+func calculateIMT(userKg, userHeight float64) (float64, error) {
 	const IMTPower = 2
+	if userKg <= 0 || userKg <= 0 {
+		return 0, errors.New("no params error")
+	}
 	IMT := userKg / math.Pow(userHeight/100, IMTPower)
-	return IMT
+	return IMT, nil
 }
 
 func getUserInput() (float64, float64) {
