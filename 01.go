@@ -5,26 +5,10 @@ import (
 	"math"
 )
 
+var i string
+
 func main() {
-	var i string
-	for i != "n" {
-		userKg, userHeight := getUserInput()
-
-		IMT := calculateIMT(userKg, userHeight)
-
-		fmt.Println(outputResult(IMT))
-
-		fmt.Print("Для завершения нажмите n Enter, для продолжения нажмите y Enter:")
-		fmt.Scan(&i)
-		if i == "y" {
-			continue
-		} else if i == "n" {
-			break
-		} else {
-			fmt.Println("Неверный ввод, завершение программы!")
-			break
-		}
-	}
+	checkRepaetCalculation()
 }
 
 func outputResult(IMT float64) string {
@@ -68,4 +52,25 @@ func getUserInput() (float64, float64) {
 	fmt.Scan(&userKg)
 	fmt.Println("----------------------------------")
 	return userKg, userHeight
+}
+
+func checkRepaetCalculation() {
+	for i != "n" {
+		userKg, userHeight := getUserInput()
+
+		IMT := calculateIMT(userKg, userHeight)
+
+		fmt.Println(outputResult(IMT))
+
+		fmt.Print("Для завершения нажмите n Enter, для продолжения нажмите y Enter:")
+		fmt.Scan(&i)
+		if i == "y" {
+			continue
+		} else if i == "n" {
+			break
+		} else {
+			fmt.Println("Неверный ввод, завершение программы!")
+			break
+		}
+	}
 }
