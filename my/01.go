@@ -6,19 +6,7 @@ import (
 )
 
 func main() {
-	for {
-		userKg, userHeight := getUserInput()
-
-		IMT := calculateIMT(userKg, userHeight)
-
-		fmt.Println(outputResult(IMT))
-
-		isRepeateCalculation := checkRepaetCalculation()
-		if !isRepeateCalculation {
-			break
-		}
-	}
-
+	checkRepaetCalculation()
 }
 
 func outputResult(IMT float64) string {
@@ -64,13 +52,24 @@ func getUserInput() (float64, float64) {
 	return userKg, userHeight
 }
 
-func checkRepaetCalculation() bool {
-	var userString string
-	fmt.Print("Для завершения нажмите n, для продолжения нажмите y:")
-	fmt.Scan(&userString)
+func checkRepaetCalculation() {
+	var i string
+	for i != "n" {
+		userKg, userHeight := getUserInput()
 
-	if userString == "y" || userString == "Y" {
-		return true
+		IMT := calculateIMT(userKg, userHeight)
+
+		fmt.Println(outputResult(IMT))
+
+		fmt.Print("Для завершения нажмите n Enter, для продолжения нажмите y Enter:")
+		fmt.Scan(&i)
+		if i == "y" || i == "Y" {
+			continue
+		} else if i == "n" || i == "N" {
+			break
+		} else {
+			fmt.Println("Неверный ввод, завершение программы!")
+			break
+		}
 	}
-	return false
 }
