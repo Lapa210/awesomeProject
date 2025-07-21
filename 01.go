@@ -5,8 +5,6 @@ import (
 	"math"
 )
 
-var i string
-
 func main() {
 	checkRepaetCalculation()
 }
@@ -55,6 +53,7 @@ func getUserInput() (float64, float64) {
 }
 
 func checkRepaetCalculation() {
+	var i string
 	for i != "n" {
 		userKg, userHeight := getUserInput()
 
