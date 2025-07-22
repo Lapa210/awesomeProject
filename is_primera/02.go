@@ -17,7 +17,7 @@ func main() {
 
 		fmt.Println(outputResult(IMT))
 
-		isRepeateCalculation := checkRepaetCalculation()
+		isRepeateCalculation := checkRepeatCalculation()
 
 		if !isRepeateCalculation {
 			break
@@ -72,7 +72,7 @@ func getUserInput() (float64, float64) {
 	return userKg, userHeight
 }
 
-func checkRepaetCalculation() bool {
+func checkRepeatCalculation() bool {
 	var userString string
 	fmt.Print("Для завершения нажмите n, для продолжения нажмите y:")
 	fmt.Scan(&userString)
